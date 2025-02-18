@@ -12,7 +12,6 @@ import '../assets/css/responsive.css';
         <div className="row align-items-center">
           <Logo/>
 
-          {/* Barre de recherche */}
             <div className="col-sm-5">
             <div className="header-search" style={{ marginTop: "30px", display: 'flex' }}>
                 <input
@@ -25,7 +24,6 @@ import '../assets/css/responsive.css';
             </div>
             </div>
 
-          {/* Panier */}
           <div className="col-sm-3">
             <div className="shopping-item">
               <a href="/cart">
