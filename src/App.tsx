@@ -4,7 +4,8 @@ import Navbar from './Components/navbar';
 import Carousel from './Components/carousel';
 import Promo from './Components/promo';
 import Marque from './Components/marque';
-import Seller from './Components/Seller';
+import TopSeller from './Components/TopSeller';
+
 
 
 const App = () => {
@@ -15,7 +16,9 @@ const App = () => {
       <Carousel />
       <Promo />
       <Marque />
-      <Seller />
+      <TopSeller />
+  
+  
 
       <Footer />
     </>
