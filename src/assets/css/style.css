@@ -1,4 +1,24 @@
-.floatleft { float: left }
+
+.product-big-title-area {
+    background-color: #e3f2fd; /* Couleur bleu très clair */
+    padding: 0px 0; /* Ajouter de l'espace autour du titre */
+    margin-bottom: 0px; /* Espacement entre cette section et le reste du contenu */
+  }
+  
+  .product-bit-title h2 {
+    font-size: 36px; /* Taille du texte plus grande pour le titre */
+    font-weight: bold; /* Titre en gras */
+    color: #333; /* Couleur du texte pour le titre */
+    letter-spacing: 1px; /* Espacement entre les lettres pour un effet de texte plus espacé */
+    text-transform: capitalize; /* Capitaliser chaque mot du titre */
+    margin: 0;
+  }
+  
+  .container {
+    max-width: 1200px; /* Largeur maximale du conteneur */
+    margin: 0 auto; /* Centrer le conteneur */
+  }
+  .floatleft { float: left }
 .floatright { float: right }
 .alignleft {
     float: left;
@@ -679,8 +699,10 @@ width: 10px;
   margin: 10px 0 0;
 }
 
-.product-big-title-area {background: url(../img/crossword.png) repeat scroll 0 0 #5a88ca}
-
+/* .product-big-title-area {
+    background: url(img/crossword.png) repeat scroll 0 0 #5a88ca;
+  } */
+  
 .product-bit-title h2 {
   font-family: raleway;
   font-size: 50px;

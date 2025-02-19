@@ -1,5 +1,3 @@
-import React from "react";
-import logo from '../assets/img/logo.png';
 
  
 const Logo = () => {
@@ -9,7 +7,7 @@ const Logo = () => {
           <div className="logo">
             <h1>
               <a href="/">
-                <img src={logo} alt="Logo" />
+                <img src="img/logo.png" alt="Logo" />
               </a>
             </h1>
           </div>

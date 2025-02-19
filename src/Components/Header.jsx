@@ -1,4 +1,4 @@
-import Logo from "./logo";
+import Logo from "./Logo";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import '../assets/css/bootstrap.min.css';

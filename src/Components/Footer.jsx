@@ -1,9 +1,22 @@
-import React from "react";
 import '../assets/css/bootstrap.min.css';
 import '../assets/css/style.css';
 import '../assets/css/responsive.css';
+import  { useState, useEffect } from 'react';
 
 const Footer = () => {
+
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    
+    // Les catégories sont récupérés à partir de l'api /catégories 
+    fetch('http://localhost:3000/categories')
+      .then(response => response.json())
+      .then(data => setCategories(data))
+      .catch(error => console.error('Error fetching categories:', error));
+  }, []);
+
+
     return (
       <div className="footer-top-area" >
         <div className="zigzag-bottom"></div>
@@ -22,11 +35,11 @@ const Footer = () => {
               <div className="footer-menu">
                 <h2 className="footer-wid-title">Categories</h2>
                 <ul>
-                  <li><a href="#">LG</a></li>
-                  <li><a href="#">Samsung</a></li>
-                  <li><a href="#">Sony</a></li>
-                  <li><a href="#">Apple</a></li>
-                  <li><a href="#">Huawei</a></li>
+                  {categories.map(category => (
+                    <li key={category.id}>
+                      <a href="#">{category.name}</a>
+                    </li>
+                  ))}
                 </ul>                        
               </div>
             </div>
