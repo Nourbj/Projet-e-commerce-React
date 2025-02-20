@@ -2,7 +2,7 @@ import '../assets/css/bootstrap.min.css';
 import '../assets/css/style.css';
 import '../assets/css/responsive.css';
 import { Link } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 
 const Navigation = () => {
   const [categories, setCategories] = useState([]);
@@ -19,20 +19,23 @@ const Navigation = () => {
     <div className="mainmenu-area">
       <div className="container">
         <div className="row">
-          <div className="navbar">
-            <ul className="nav navbar-nav navbar-expand">
-              <li className="active"><a href="/">Home</a></li>
-              {categories.map(category => (
+          <nav className="navbar navbar-expand">
+            <ul className="nav navbar-nav">
+              <li className="active">
+                <Link to="/">Home</Link>
+              </li>
+              {categories.map((category) => (
                 <li key={category.id}>
                   <Link to={`/Shop/${category.name.toLowerCase()}`}>{category.name}</Link>
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
         </div>
       </div>
     </div>
   );
 };
+
 
 export default Navigation;
