@@ -1,18 +1,30 @@
-import '../assets/css/bootstrap.min.css';
-import '../assets/css/style.css';
-import '../assets/css/responsive.css';
-import { Link } from 'react-router-dom';
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { getCategories } from "../Services/Categorie"; 
+import "../assets/css/bootstrap.min.css";
+import "../assets/css/style.css";
+import "../assets/css/responsive.css";
 
 const Navigation = () => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    // Fetch categories from the API
-    fetch('http://localhost:3000/categories')
-      .then(response => response.json())
-      .then(data => setCategories(data))
-      .catch(error => console.error('Error fetching categories:', error));
+    const fetchCategories = async () => {
+      try {
+        const data = await getCategories();
+        if (Array.isArray(data)) {
+          setCategories(data);
+        } else {
+          console.error("Données de catégories invalides :", data);
+          setCategories([]); 
+        }
+      } catch (error) {
+        console.error("Erreur lors de la récupération des catégories :", error);
+        setCategories([]);
+      }
+    };
+
+    fetchCategories();
   }, []);
 
   return (
@@ -24,11 +36,15 @@ const Navigation = () => {
               <li className="active">
                 <Link to="/">Home</Link>
               </li>
-              {categories.map((category) => (
-                <li key={category.id}>
-                  <Link to={`/Shop/${category.name.toLowerCase()}`}>{category.name}</Link>
-                </li>
-              ))}
+              {categories.length > 0 ? (
+                categories.map((category) => (
+                  <li key={category.id}>
+                    <Link to={`/Shop/${category.name.toLowerCase()}`}>{category.name}</Link>
+                  </li>
+                ))
+              ) : (
+                <li><p>Aucune catégorie</p></li>
+              )}
             </ul>
           </nav>
         </div>
@@ -36,6 +52,5 @@ const Navigation = () => {
     </div>
   );
 };
-
 
 export default Navigation;

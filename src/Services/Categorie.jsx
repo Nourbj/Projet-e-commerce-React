@@ -3,13 +3,12 @@ const API_URL = "http://localhost:3000/categories";
 export const getCategories = async () => {
   try {
     const response = await fetch(API_URL);
-    const data = await response.json();
-
-    const categories = data.map(item => item.name);
-    return categories;
+    if (!response.ok) {
+      throw new Error("Erreur lors de la récupération des catégories");
+    }
+    return await response.json();
   } catch (error) {
-    console.error("Erreur lors de la récupération des catégories :", error);
+    console.error("Erreur API :", error);
     return [];
   }
 };
- 
