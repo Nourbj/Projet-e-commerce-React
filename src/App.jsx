@@ -4,6 +4,9 @@ import Home from "./Pages/Home";
 import Shop from "./Pages/Shop";
 import ProductDetails from "./Pages/FicheProduit";
 import Search from "./Components/Search";
+import Checkout from "./Pages/Checkout";
+import Cart from "./Pages/Cart";
+
 
 function App() {
   return (
@@ -15,6 +18,10 @@ function App() {
           <Route path="/Shop/:category" element={<Shop />} />
           <Route path="/Shop/:category/ProductDetails/:id" element={<ProductDetails />} />
           <Route path="/:Search" element={<Search />} />
+          <Route path="/Checkout" element={<Checkout />} />
+          <Route path="/Cart" element={<Cart />} />
+
+
 
 
 

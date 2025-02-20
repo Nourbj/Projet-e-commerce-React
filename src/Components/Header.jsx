@@ -1,17 +1,19 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom"; // Import pour récupérer la route actuelle
 import axios from "axios";
 import '../assets/css/bootstrap.min.css';
 import '../assets/css/style.css';
 import '../assets/css/responsive.css';
 import Search from "./Search"; 
+import Cart from '../Pages/Cart'; 
 
- 
- const Header = () => {
+
+const Header = () => {
   const [cart, setCart] = useState({ total: 0, count: 0 });
   const [cartId, setCartId] = useState(localStorage.getItem("cartId"));
+  const location = useLocation(); 
 
-   
-   useEffect(() => {
+  useEffect(() => {
     const fetchCart = async () => {
       if (cartId) {
         try {
@@ -29,25 +31,29 @@ import Search from "./Search";
     fetchCart();
   }, [cartId]);
 
- 
-
- return (
+  return (
     <header className="header-area">
       <div className="container">
-        <div className="row align-items-center">
-        <div className="row align-items-center">
-        <div className="col-sm-8">
-          <div className="logo">
-            <h1>
-                <img src="img/logo.png" alt="Logo" />
-            </h1>
+        {/* Utilisation de Flexbox pour aligner les éléments horizontalement */}
+        <div className="row align-items-center d-flex justify-content-between">
+          
+          {/* Logo */}
+          <div className="col-sm-3 d-flex align-items-center">
+            <div className="logo">
+              <h1>
+                <img src="img/logo.png" alt="Logo" className="img-fluid" />
+              </h1>
+            </div>
           </div>
-        </div>
-      </div>
-  
-       <Search/>
 
-          <div className="col-sm-3">
+          {/* Searchbar (affiché sauf sur Checkout) */}
+          <div className="col-sm-6 d-flex justify-content-center">
+          {location.pathname !== "/Checkout" && location.pathname !== "/cart" && <Search />}
+            
+          </div>
+
+          {/* Panier (Cart) */}
+          <div className="col-sm-3 d-flex justify-content-end">
             <div className="shopping-item">
               <a href="/cart">
                 Cart: <span className="cart-amunt">{cart.total.toFixed(2)} €</span>{" "}
@@ -56,6 +62,7 @@ import Search from "./Search";
               </a>
             </div>
           </div>
+
         </div>
       </div>
     </header>

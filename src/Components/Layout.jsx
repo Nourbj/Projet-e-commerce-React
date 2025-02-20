@@ -1,13 +1,15 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Header from "./Header";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 
 const Layout = () => {
+  const location = useLocation();
+
   return (
     <>
       <Header />
-      <Navbar />
+      {location.pathname !== "/Checkout" && location.pathname !== "/cart" && <Navbar />}
       <main>
         <Outlet />
       </main>
