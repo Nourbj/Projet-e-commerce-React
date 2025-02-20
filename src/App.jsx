@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./Components/Layout";
 import Home from "./Pages/Home";
 import Shop from "./Pages/Shop";
+import ProductDetails from "./Pages/FicheProduit";
 
 function App() {
   return (
@@ -12,6 +13,9 @@ function App() {
 
           <Route path="/:category" element={<Shop />} />
           <Route path="/Shop/:category" element={<Shop />} />
+          <Route path="/Shop/:category/ProductDetails/:id" element={<ProductDetails />} />
+
+
         </Route>
       </Routes>
     </BrowserRouter>

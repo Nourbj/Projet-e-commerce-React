@@ -8,6 +8,7 @@ import '../assets/css/responsive.css';
 import Pagination from '../Components/Pagination';
 import ProductShop from "../Components/ProductShop";
 import CategoryTitle from "../Components/CategoryTitle"; 
+import { Link } from 'react-router-dom';
 
 const API_BASE_URL = "http://localhost:3000";
 
@@ -76,15 +77,16 @@ const Shop = () => {
 
       return (
         <div key={product.id} className="col-md-3 col-sm-6">
-          <ProductShop
-            image={`/img/produts-img/${categoryTitle}/${product.imageName}`}
-            name={product.name}
-            link={`single-product/${product.id}`}
-            rating={product.review}
-            price={priceAfterDiscount.toFixed(2)}  // Prix après remise
-            oldPrice={product.price.toFixed(2)}  // Prix avant remise
-          />
-        </div>
+      <Link to={`/Shop/${category}/ProductDetails/${product.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+        <ProductShop
+          image={`/img/produts-img/${categoryTitle}/${product.imageName}`}
+          name={product.name}
+          rating={product.review}
+          price={priceAfterDiscount.toFixed(2)}
+          oldPrice={product.price.toFixed(2)}
+        />
+      </Link>
+    </div>
       );
     })
   ) : (
@@ -93,8 +95,6 @@ const Shop = () => {
 </div>
 </div>
 </div>
-
-
       <Pagination />
     </div>
   );

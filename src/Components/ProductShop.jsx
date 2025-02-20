@@ -11,7 +11,7 @@ function ProductShop({ image, name, link, rating, price, oldPrice }) {
       </h3>
       <div className="product-price">
         <ins>${price}</ins>
-        {oldPrice && <del>${oldPrice}</del>} {/* Affiche le prix barré */}
+        {oldPrice && <del>${oldPrice}</del>} 
       </div>
 
       <div className="product-add-to-cart">

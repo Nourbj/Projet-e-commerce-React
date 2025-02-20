@@ -1,5 +1,4 @@
-import Logo from "./Logo";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import '../assets/css/bootstrap.min.css';
 import '../assets/css/style.css';
@@ -63,11 +62,20 @@ import '../assets/css/responsive.css';
     <header className="header-area">
       <div className="container">
         <div className="row align-items-center">
-          <Logo />
+        <div className="row align-items-center">
+        <div className="col-sm-8">
+          <div className="logo">
+            <h1>
+                <img src="img/logo.png" alt="Logo" />
+            </h1>
+          </div>
+        </div>
+      </div>
+  
 
-          <div className="col-sm-5">
-            <div className="header-search" style={{ marginTop: "30px", display: 'flex' }}>
-              <input
+      <div className="col-sm-5">
+        <div className="header-search" style={{ marginTop: "30px", display: 'flex' }}>
+          <input
                 type="text"
                 placeholder="Search products..."
                 className="form-control"
@@ -78,8 +86,8 @@ import '../assets/css/responsive.css';
               <button className="btn btn-search" onClick={handleSearch}>
                 Search
               </button>
-            </div>
           </div>
+      </div>
 
           <div className="col-sm-3">
             <div className="shopping-item">
