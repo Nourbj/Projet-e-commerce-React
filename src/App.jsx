@@ -3,6 +3,7 @@ import Layout from "./Components/Layout";
 import Home from "./Pages/Home";
 import Shop from "./Pages/Shop";
 import ProductDetails from "./Pages/FicheProduit";
+import Search from "./Components/Search";
 
 function App() {
   return (
@@ -10,10 +11,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-
           <Route path="/:category" element={<Shop />} />
           <Route path="/Shop/:category" element={<Shop />} />
           <Route path="/Shop/:category/ProductDetails/:id" element={<ProductDetails />} />
+          <Route path="/:Search" element={<Search />} />
+
 
 
         </Route>
