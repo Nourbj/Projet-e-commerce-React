@@ -14,6 +14,7 @@ const PanierItem = () => {
   const handleRemoveItem = (id) => {
     dispatch(removeItemFromCart(id));  
   };
+  
 
   return (
     <table cellspacing="0" className="shop_table cart">
@@ -45,7 +46,7 @@ const PanierItem = () => {
                 height="145"
                 alt={item.name}
                 className="shop_thumbnail"
-                src={item.imageUrl}
+                src={`/img/produts-img/${item.category}/${item.imageName}`} 
               />
             </td>
             <td className="product-name">{item.name}</td>
@@ -100,3 +101,5 @@ const PanierItem = () => {
 };
 
 export default PanierItem;
+
+

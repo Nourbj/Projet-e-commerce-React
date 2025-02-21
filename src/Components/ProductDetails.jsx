@@ -37,7 +37,6 @@ function ProductDetails({ product }) {
                   Add to cart
                 </button>
 
-              {message && <p>{message}</p>}  
             </div>
           </div>
         </div>

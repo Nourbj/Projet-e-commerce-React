@@ -4528,27 +4528,21 @@
     {
       "items": [
         {
-          "name": "apple ipad air",
-          "price": "518.30",
-          "qty": 1,
-          "imageName": "/img/produts-img/Apple/apple-ipad-air.jpg"
+          "name": "sony xperia e5r",
+          "price": "197.49",
+          "qty": 3,
+          "imageName": "/img/produts-img/Sony/sony-xperia-e5r.jpg"
         },
         {
-          "name": "samsung galaxy a10e sm a102u",
-          "price": "334.49",
+          "name": "apple ipad mini 2019",
+          "price": "481.49",
           "qty": 1,
-          "imageName": "/img/produts-img/Samsung/samsung-galaxy-a10e-sm-a102u.jpg"
-        },
-        {
-          "name": "apple ipad mini2",
-          "price": "534.30",
-          "qty": 1,
-          "imageName": "/img/produts-img/Apple/apple-ipad-mini2.jpg"
+          "imageName": "/img/produts-img/Apple/apple-ipad-mini-2019.jpg"
         }
       ],
-      "total": 1489.4247999999998,
-      "subTotal": 1387.09,
-      "tax": 166.45079999999996,
+      "total": 1145.0564,
+      "subTotal": 1073.96,
+      "tax": 128.8752,
       "cartId": "30f1",
       "id": "30f1"
     },
