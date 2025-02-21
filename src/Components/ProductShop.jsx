@@ -1,4 +1,17 @@
-function ProductShop({ image, name, link, rating, price, oldPrice }) {
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../Redux/CartSlice"; 
+import { selectCart } from "../Redux/Store"; 
+
+function ProductShop({ image, name, link, price, oldPrice, id }) {
+  const dispatch = useDispatch();
+  const cart = useSelector(selectCart); 
+  const handleAddToCart = () => {
+    const product = { id, name, price, imageName: image };
+    dispatch(addToCart(product, 1));  
+  };
+  
+
   return (
     <div className="product-item">
       <div className="product-image">
@@ -11,14 +24,15 @@ function ProductShop({ image, name, link, rating, price, oldPrice }) {
       </h3>
       <div className="product-price">
         <ins>${price}</ins>
-        {oldPrice && <del>${oldPrice}</del>} 
+        {oldPrice && <del>${oldPrice}</del>}
       </div>
 
       <div className="product-add-to-cart">
-        <a href={`/canvas/shop/?add-to-cart=${link}`} className="btn btn-primary" rel="nofollow">
+        <button className="btn btn-primary" onClick={handleAddToCart}>
           Add to Cart
-        </a>
+        </button>
       </div>
+
     </div>
   );
 }

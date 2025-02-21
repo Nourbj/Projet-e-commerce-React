@@ -72,7 +72,6 @@ const Shop = () => {
     <p className="text-danger">{error}</p>
   ) : products.length > 0 ? (
     products.map((product) => {
-      // Calcul du prix après remise
       const priceAfterDiscount = product.price * (1 - (product.discountRate / 100));
 
       return (

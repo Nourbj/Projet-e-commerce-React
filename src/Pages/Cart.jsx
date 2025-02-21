@@ -1,10 +1,11 @@
-import PanierItem from "../Components/PanierItem";
-import CartTotals from "../Components/CartTotals";
-import Intrest from "../Components/Intrest";
-
-
+import { useSelector } from "react-redux";
+import PanierItem from "../Components/PanierItem";  
+import Intrest from "../Components/Intrest";           
+import CartTotals from "../Components/CartTotals";    
 
 const Cart = () => {
+  const cart = useSelector((state) => state.cart);
+
   return (
     <div className="single-product-area">
       <div className="zigzag-bottom"></div>
@@ -13,11 +14,14 @@ const Cart = () => {
           <div className="col-md-12">
             <div className="product-content-right">
               <div className="woocommerce">
-              <PanierItem />
+                <PanierItem items={cart.items} />
                 <div className="cart-collaterals">
-                 <Intrest />
-
-                  <CartTotals />
+                  <Intrest />
+                  <CartTotals
+                    subTotal={cart.subTotal}
+                    tax={cart.tax}
+                    total={cart.total}
+                  />
                 </div>
               </div>
             </div>
@@ -27,5 +31,4 @@ const Cart = () => {
     </div>
   );
 };
-
 export default Cart;
