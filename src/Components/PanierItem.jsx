@@ -12,7 +12,7 @@ const PanierItem = () => {
   };
 
   const handleRemoveItem = (id) => {
-    dispatch(removeItemFromCart(id));  // Passer l'ID de l'élément à supprimer
+    dispatch(removeItemFromCart(id));  
   };
 
   return (
@@ -31,29 +31,24 @@ const PanierItem = () => {
         {items.map((item) => (
           <tr key={item.id} className="cart_item">
             <td className="product-remove">
-              <a
+              <button
                 title="Remove this item"
                 className="remove"
-                href="#"
-                onClick={() => handleRemoveItem(item.id)}  // Passer l'ID de l'élément
+                onClick={() => handleRemoveItem(item.id)} 
               >
                 ×
-              </a>
+              </button>
             </td>
             <td className="product-thumbnail">
-              <a href="single-product.html">
-                <img
-                  width="145"
-                  height="145"
-                  alt={item.name}
-                  className="shop_thumbnail"
-                  src={item.imageUrl}
-                />
-              </a>
+              <img
+                width="145"
+                height="145"
+                alt={item.name}
+                className="shop_thumbnail"
+                src={item.imageUrl}
+              />
             </td>
-            <td className="product-name">
-              <a href="single-product.html">{item.name}</a>
-            </td>
+            <td className="product-name">{item.name}</td>
             <td className="product-price">
               <span className="amount">{item.price}€</span>
             </td>
@@ -63,7 +58,7 @@ const PanierItem = () => {
                   type="button"
                   className="minus"
                   value="-"
-                  onClick={() => handleUpdateQuantity(item.id, item.qty - 1)}  // Réduire la quantité
+                  onClick={() => handleUpdateQuantity(item.id, item.qty - 1)}  
                 />
                 <input
                   type="number"

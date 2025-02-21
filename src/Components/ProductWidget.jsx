@@ -3,11 +3,12 @@ import ProductItem from './ProductItem';
 import '../assets/css/bootstrap.min.css';
 import '../assets/css/style.css';
 import '../assets/css/responsive.css';
-
+ 
 function ProductWidget({ title, apiUrl }) {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const [showAll, setShowAll] = useState(false); 
+  
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -20,29 +21,35 @@ function ProductWidget({ title, apiUrl }) {
         setLoading(false);
       }
     };
-
+ 
     fetchProducts();
   }, [apiUrl]);
-
+ 
   const getCategoryFromImage = (imageName) => {
     const category = imageName.split('-')[0].toLowerCase();
     return category.charAt(0).toUpperCase() + category.slice(1);
   };
-
+ 
+  const handleViewAllClick = () => {
+    setShowAll(!showAll);
+  };
+ 
+  const productsToDisplay = showAll ? products : products.slice(0, 2);
+ 
   return (
     <div className="col-md-4">
       <div className="single-product-widget">
         <h2 className="product-wid-title">{title}</h2>
-        <a href={`/view-all/${title}`} className="wid-view-more">
-          View All
+        <a href="#" onClick={handleViewAllClick} className="wid-view-more">
+          {showAll ? 'View Less' : 'View All'}
         </a>
-
+ 
         {loading ? (
           <p>Loading products...</p>
-        ) : products.length > 0 ? (
-          products.map((product) => {
+        ) : productsToDisplay.length > 0 ? (
+          productsToDisplay.map((product) => {
             const category = getCategoryFromImage(product.imageName);
-
+ 
             return (
               <ProductItem
                 key={product.id}
@@ -62,5 +69,5 @@ function ProductWidget({ title, apiUrl }) {
     </div>
   );
 }
-
+ 
 export default ProductWidget;

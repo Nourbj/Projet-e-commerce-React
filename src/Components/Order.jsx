@@ -2,53 +2,56 @@ import '../assets/css/font-awesome.min.css'
 import '../assets/css/bootstrap.min.css';
 import '../assets/css/style.css';
 import '../assets/css/responsive.css';
-
+import { useSelector } from 'react-redux';
 
 const Order = () => { 
-    
-    
-return (   
+  const cartItems = useSelector((state) => state.cart.items);
+  const total = useSelector((state) => state.cart.total);
+  const subTotal = useSelector((state) => state.cart.subTotal);
+  const tax = useSelector((state) => state.cart.tax);
+  
+  return (   
     <table className="shop_table">
-    <thead>
+      <thead>
         <tr>
-            <th className="product-name">Product</th>
-            <th className="product-total">Total</th>
+          <th className="product-name">Product</th>
+          <th className="product-total">Total</th>
         </tr>
-    </thead>
-    <tbody>
-        <tr className="cart_item">
+      </thead>
+      <tbody>
+        {cartItems.map((item) => (
+          <tr key={item.id} className="cart_item">
             <td className="product-name">
-                Ship Your Idea{" "}
-                <strong className="product-quantity">× 1</strong>{" "}
+              {item.name} <strong className="product-quantity">× {item.qty}</strong>
             </td>
             <td className="product-total">
-                <span className="amount">£15.00</span>{" "}
+              <span className="amount">{(item.price * item.qty).toFixed(2)} €</span>
             </td>
-        </tr>
-    </tbody>
-    <tfoot>
+          </tr>
+        ))}
+      </tbody>
+      <tfoot>
         <tr className="cart-subtotal">
-            <th>Cart Subtotal</th>
-            <td>
-                <span className="amount">£15.00</span>
-            </td>
+          <th>Cart Subtotal</th>
+          <td>
+            <span className="amount">{subTotal.toFixed(2)} €</span>
+          </td>
         </tr>
         <tr className="shipping">
-            <th>Taxe (20%)</th>
-            <td>12.12 €</td>
+          <th>Taxe (20%)</th>
+          <td>{tax.toFixed(2)} €</td>
         </tr>
         <tr className="order-total">
-            <th>Order Total</th>
-            <td>
-                <strong>
-                    <span className="amount">15.00 € </span>
-                </strong>{" "}
-            </td>
+          <th>Order Total</th>
+          <td>
+            <strong>
+              <span className="amount">{total.toFixed(2)} €</span>
+            </strong>
+          </td>
         </tr>
-    </tfoot>
-</table>
-  
-  )
-  };
-export default Order;
+      </tfoot>
+    </table>
+  );
+};
 
+export default Order;
