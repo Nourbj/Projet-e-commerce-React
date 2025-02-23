@@ -264,11 +264,16 @@ const Checkout = () => {
                       <Payment />
 
                       <div className="form-row place-order">
-                        <button
-                          type="button"
-                          onClick={handlePlaceOrder}
-                          className="button alt">Place Order</button>
-                      </div>
+  <button
+    type="button"
+    onClick={handlePlaceOrder} // Calls the order placement handler
+    className={`button alt${orderPlaced ? ' disabled' : ''}`} // Disable button after order is placed
+    disabled={orderPlaced} // Disable the button once the order is placed
+  >
+    {orderPlaced ? "Order Placed" : "Place Order"} {/* Button text changes when order is placed */}
+  </button>
+</div>
+
                     </div>
                   </form>
                 </div>

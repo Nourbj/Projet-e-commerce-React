@@ -1,7 +1,7 @@
 import { Outlet, useLocation } from "react-router-dom";
 import Header from "./Header";
-import Navbar from "./Navbar";
 import Footer from "./Footer";
+import  Navbar  from "./Navbar";
 
 const Layout = () => {
   const location = useLocation();
@@ -9,10 +9,13 @@ const Layout = () => {
   return (
     <>
       <Header />
-      {location.pathname !== "/Checkout" && location.pathname !== "/cart" && <Navbar />}
+      
+      {location.pathname !== "/checkout" && location.pathname !== "/cart" && <Navbar />}
+
       <main>
         <Outlet />
       </main>
+
       <Footer />
     </>
   );

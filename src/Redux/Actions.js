@@ -1,5 +1,3 @@
-
-
 import axios from "axios";
 import { createSlice } from "@reduxjs/toolkit";
 
@@ -22,7 +20,7 @@ const initialState = loadCartFromLocalStorage() || {
   tax: 0,
 };
 
-const CartSlice = createSlice({
+const Actions = createSlice({
   name: "cart",
   initialState,
   reducers: {
@@ -55,12 +53,14 @@ const CartSlice = createSlice({
       state.total = state.subTotal + state.tax;
       saveCartToLocalStorage(state);
     },
-    removeFromCart: (state, action) => {
-      // Filtrer le produit à supprimer en utilisant l'ID fourni dans l'action
-      const productIdToRemove = action.payload;
-      state.items = state.items.filter(item => item.id !== productIdToRemove);
     
-      // Recalculer les valeurs du sous-total, taxe et total
+    
+     
+    removeFromCart: (state, action) => {
+      const productIdToRemove = action.payload;
+      console.log('Removing item with ID:', productIdToRemove); // Log pour débogage
+      state.items = state.items.filter(item => item.id !== productIdToRemove);
+
       if (state.items.length === 0) {
         state.total = 0;
         state.subTotal = 0;
@@ -70,11 +70,10 @@ const CartSlice = createSlice({
         state.tax = state.subTotal * 0.12;
         state.total = state.subTotal + state.tax;
       }
-    
-      // Sauvegarder l'état mis à jour dans le localStorage
+
       saveCartToLocalStorage(state);
-    
-      // Mise à jour du panier sur le serveur si un `cartId` existe
+
+      // Mise à jour du panier sur le serveur si cartId existe
       const updateCart = async () => {
         if (state.cartId) {
           try {
@@ -84,9 +83,10 @@ const CartSlice = createSlice({
           }
         }
       };
-      
       updateCart();
     },
+    
+    
     
     
     
@@ -118,7 +118,7 @@ const CartSlice = createSlice({
   },
 });
 
-export const { setCart, addItem, removeFromCart, updateQuantity, clearCart } = CartSlice.actions;
+export const { setCart, addItem, removeFromCart, updateQuantity, clearCart } = Actions.actions;
 
 export const addToCart = (product, quantity = 1) => async (dispatch, getState) => {
   const { cart } = getState();
@@ -183,4 +183,4 @@ export const clearCartAPI = () => async (dispatch, getState) => {
   dispatch(clearCart()); 
 };
 
-export default CartSlice.reducer;
+export default Actions.reducer;

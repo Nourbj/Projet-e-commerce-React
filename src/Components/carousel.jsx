@@ -1,7 +1,8 @@
-import React from 'react';
 import { Carousel } from 'react-bootstrap';
 import '../assets/css/font-awesome.min.css'
-
+import '../assets/css/bootstrap.min.css';
+import '../assets/css/style.css';
+import '../assets/css/responsive.css';
 
 function CustomCarousel() {
   return (

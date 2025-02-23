@@ -1,11 +1,13 @@
 import ProductWidget from './ProductWidget.jsx';
 
+
 function ProductsArea() {
   return (
     <div className="product-widget-area">
       <div className="zigzag-bottom" />
       <div className="container">
         <div className="row">
+
           <ProductWidget 
             title="Top Sellers" 
             apiUrl="http://localhost:3000/top-sellers-products" 

@@ -12,3 +12,11 @@ export const getCategories = async () => {
     return [];
   }
 };
+
+//  extraire une catégorie à partir du nom d'une image
+
+export  const getCategoryFromImage = (imageName) => {
+  if (!imageName) return "Unknown";  
+  const category = imageName.split("-")[0].toLowerCase();
+  return category.charAt(0).toUpperCase() + category.slice(1);
+};

@@ -20,7 +20,7 @@ const Header = () => {
             </div>
           </div>
           <div className="col-sm-6 d-flex justify-content-center">
-            {location.pathname !== "/Checkout" && location.pathname !== "/cart" && <Search />}
+            {location.pathname !== "/checkout" && location.pathname !== "/cart" && <Search />}
           </div>
             <CartComponent />
           </div>
