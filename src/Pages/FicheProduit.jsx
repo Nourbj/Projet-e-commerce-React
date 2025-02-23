@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom"; // Import useNavigate
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../Redux/Actions"; 
+import { selectCart } from "../Redux/Store";
 import { getProductById } from "../Services/Produit";
 import "../assets/css/font-awesome.min.css";
 import "../assets/css/bootstrap.min.css";
@@ -13,6 +16,19 @@ import ProductWidget from "../Components/ProductWidget";
 const FicheProduit = () => {
   const { id, category } = useParams();
   const [product, setProduct] = useState(null);
+  const dispatch = useDispatch();
+  const cart = useSelector(selectCart); 
+  const navigate = useNavigate(); 
+
+  const handleAddToCart = () => {
+    if (product) {
+      const { id, name, price, imageName } = product;
+      const productToAdd = { id, name, price, imageName };
+      dispatch(addToCart(productToAdd, 1));  
+      
+      navigate("/cart");
+    }
+  };
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -30,7 +46,7 @@ const FicheProduit = () => {
   }, [id]);
 
   if (!product) {
-    return null;
+    return <div>Loading...</div>; 
   }
 
   return (
@@ -41,7 +57,7 @@ const FicheProduit = () => {
           <div className="col-md-4">
             <div className="single-sidebar">
               <h2 className="sidebar-title">Recently Viewed</h2>
-              <ProductWidget title="Recently Viewed" showViewAllButton={false} showTitle={false}/>
+              <ProductWidget title="Recently Viewed" showViewAllButton={false} showTitle={false} />
               <OtherBrand />
             </div>
           </div>
@@ -83,8 +99,8 @@ const FicheProduit = () => {
                           step={1}
                         />
                       </div>
-                      <button className="add_to_cart_button" type="submit">
-                        Add to cart
+                      <button className="btn btn-primary" onClick={handleAddToCart}>
+                        Add to Cart
                       </button>
                     </form>
                     <ProductDescription description={product.description} />

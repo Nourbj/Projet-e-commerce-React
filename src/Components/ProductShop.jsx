@@ -1,4 +1,3 @@
-import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../Redux/Actions"; 
 import { selectCart } from "../Redux/Store"; 

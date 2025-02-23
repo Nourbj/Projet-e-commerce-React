@@ -1,161 +1,117 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
-const ShipAdress = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+const ShippingAddress = ({ shippingValid, setShippingValid, setError, watch, trigger }) => {
+  const { register, formState: { errors }, setError: setFormError, trigger: triggerField } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data); // Vous pouvez traiter les données ici
+  const validateField = async (fieldName) => {
+    const isValid = await triggerField(fieldName);
+    setShippingValid(isValid);
   };
 
   return (
-    <div className="col-6">
-      <div className="woocommerce-shipping-fields">
-        <h3 id="ship-to-different-address">
-          <label className="checkbox" htmlFor="ship-to-different-address-checkbox">
-            Ship to a different address?
+    <div className="woocommerce-shipping-fields">
+      <h3>Shipping Address</h3>
+
+      <div className="woocommerce-shipping-fields__field-wrapper">
+        <p className={`form-row form-row-first ${errors.shipping_first_name ? 'woocommerce-invalid' : ''}`}>
+          <label htmlFor="shipping_first_name" className="required">
+            First Name
           </label>
           <input
-            className="input-checkbox"
-            defaultChecked
-            defaultValue="1"
-            id="ship-to-different-address-checkbox"
-            name="ship_to_different_address"
-            type="checkbox"
+            type="text"
+            className="input-text"
+            name="shipping_first_name"
+            id="shipping_first_name"
+            required
+            ref={register({ required: "First name is required" })}
+            onBlur={() => validateField("shipping_first_name")}
           />
-        </h3>
+          {errors.shipping_first_name && <span className="woocommerce-error">{errors.shipping_first_name.message}</span>}
+        </p>
 
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="shipping_address" style={{ display: "block" }}>
-            {/* Civility */}
-            <p className="form-row form-row-wide address-field">
-              <label htmlFor="shipping_country">
-                Civility <abbr className="required" title="required">*</abbr>
-              </label>
-              <select
-                {...register("shipping_country", { required: true })}
-                id="shipping_country"
-                name="shipping_country"
-              >
-                <option value="AX">Mr</option>
-                <option value="AF">Mlle</option>
-                <option value="AF">Mme</option>
-              </select>
-              {errors.shipping_country && <span>This field is required</span>}
-            </p>
+        <p className={`form-row form-row-last ${errors.shipping_last_name ? 'woocommerce-invalid' : ''}`}>
+          <label htmlFor="shipping_last_name" className="required">
+            Last Name
+          </label>
+          <input
+            type="text"
+            className="input-text"
+            name="shipping_last_name"
+            id="shipping_last_name"
+            required
+            ref={register({ required: "Last name is required" })}
+            onBlur={() => validateField("shipping_last_name")}
+          />
+          {errors.shipping_last_name && <span className="woocommerce-error">{errors.shipping_last_name.message}</span>}
+        </p>
 
-            {/* First Name */}
-            <p className="form-row form-row-first validate-required">
-              <label htmlFor="shipping_first_name">
-                First Name <abbr className="required" title="required">*</abbr>
-              </label>
-              <input
-                {...register("shipping_first_name", { required: true })}
-                id="shipping_first_name"
-                type="text"
-              />
-              {errors.shipping_first_name && <span>This field is required</span>}
-            </p>
+        <p className={`form-row form-row-wide ${errors.shipping_address_1 ? 'woocommerce-invalid' : ''}`}>
+          <label htmlFor="shipping_address_1" className="required">
+            Address
+          </label>
+          <input
+            type="text"
+            className="input-text"
+            name="shipping_address_1"
+            id="shipping_address_1"
+            required
+            ref={register({ required: "Shipping address is required" })}
+            onBlur={() => validateField("shipping_address_1")}
+          />
+          {errors.shipping_address_1 && <span className="woocommerce-error">{errors.shipping_address_1.message}</span>}
+        </p>
 
-            {/* Last Name */}
-            <p className="form-row form-row-last validate-required">
-              <label htmlFor="shipping_last_name">
-                Last Name <abbr className="required" title="required">*</abbr>
-              </label>
-              <input
-                {...register("shipping_last_name", { required: true })}
-                id="shipping_last_name"
-                type="text"
-              />
-              {errors.shipping_last_name && <span>This field is required</span>}
-            </p>
+        <p className={`form-row form-row-wide ${errors.shipping_city ? 'woocommerce-invalid' : ''}`}>
+          <label htmlFor="shipping_city" className="required">
+            City
+          </label>
+          <input
+            type="text"
+            className="input-text"
+            name="shipping_city"
+            id="shipping_city"
+            required
+            ref={register({ required: "City is required" })}
+            onBlur={() => validateField("shipping_city")}
+          />
+          {errors.shipping_city && <span className="woocommerce-error">{errors.shipping_city.message}</span>}
+        </p>
 
-            {/* Company Name */}
-            <p className="form-row form-row-wide">
-              <label htmlFor="shipping_company">Company Name</label>
-              <input
-                {...register("shipping_company")}
-                id="shipping_company"
-                type="text"
-              />
-            </p>
+        <p className={`form-row form-row-wide ${errors.shipping_postcode ? 'woocommerce-invalid' : ''}`}>
+          <label htmlFor="shipping_postcode" className="required">
+            Postcode
+          </label>
+          <input
+            type="text"
+            className="input-text"
+            name="shipping_postcode"
+            id="shipping_postcode"
+            required
+            ref={register({ required: "Postcode is required" })}
+            onBlur={() => validateField("shipping_postcode")}
+          />
+          {errors.shipping_postcode && <span className="woocommerce-error">{errors.shipping_postcode.message}</span>}
+        </p>
 
-            {/* Address 1 */}
-            <p className="form-row form-row-wide address-field">
-              <label htmlFor="shipping_address_1">
-                Address <abbr className="required" title="required">*</abbr>
-              </label>
-              <input
-                {...register("shipping_address_1", { required: true })}
-                id="shipping_address_1"
-                type="text"
-              />
-              {errors.shipping_address_1 && <span>This field is required</span>}
-            </p>
-
-            {/* Address 2 */}
-            <p className="form-row form-row-wide address-field">
-              <input
-                {...register("shipping_address_2")}
-                id="shipping_address_2"
-                type="text"
-                placeholder="Apartment, suite, unit etc. (optional)"
-              />
-            </p>
-
-            {/* City */}
-            <p className="form-row form-row-wide address-field">
-              <label htmlFor="shipping_city">
-                Town / City <abbr className="required" title="required">*</abbr>
-              </label>
-              <input
-                {...register("shipping_city", { required: true })}
-                id="shipping_city"
-                type="text"
-              />
-              {errors.shipping_city && <span>This field is required</span>}
-            </p>
-
-            {/* State */}
-            <p className="form-row form-row-first address-field">
-              <label htmlFor="shipping_state">County</label>
-              <input
-                {...register("shipping_state")}
-                id="shipping_state"
-                type="text"
-              />
-            </p>
-
-            {/* Postcode */}
-            <p className="form-row form-row-last address-field">
-              <label htmlFor="shipping_postcode">
-                Postcode <abbr className="required" title="required">*</abbr>
-              </label>
-              <input
-                {...register("shipping_postcode", { required: true })}
-                id="shipping_postcode"
-                type="text"
-              />
-              {errors.shipping_postcode && <span>This field is required</span>}
-            </p>
-
-            <div className="clear" />
-
-            {/* Order Comments */}
-            <p className="form-row notes" id="order_comments_field">
-              <label htmlFor="order_comments">Order Notes</label>
-              <textarea
-                {...register("order_comments")}
-                id="order_comments"
-                placeholder="Notes about your order, e.g. special notes for delivery."
-                rows="2"
-              />
-            </p>
-          </div>
-        </form>
+        <p className={`form-row form-row-wide ${errors.shipping_country ? 'woocommerce-invalid' : ''}`}>
+          <label htmlFor="shipping_country" className="required">
+            Country
+          </label>
+          <input
+            type="text"
+            className="input-text"
+            name="shipping_country"
+            id="shipping_country"
+            required
+            ref={register({ required: "Country is required" })}
+            onBlur={() => validateField("shipping_country")}
+          />
+          {errors.shipping_country && <span className="woocommerce-error">{errors.shipping_country.message}</span>}
+        </p>
       </div>
     </div>
   );
 };
 
-export default ShipAdress;
+export default ShippingAddress;

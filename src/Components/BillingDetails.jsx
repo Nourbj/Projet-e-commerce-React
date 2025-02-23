@@ -1,90 +1,81 @@
-import React from 'react';
 import { useForm } from 'react-hook-form';
 
-const BillingDetails = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+const BillingDetails = ({ billingValid, setBillingValid, setError, watch, trigger }) => {
+  const { register, formState: { errors }, setError: setFormError, trigger: triggerField } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data); // Here, you can send or process the data
+  const validateField = async (fieldName) => {
+    const isValid = await triggerField(fieldName);
+    setBillingValid(isValid);
   };
 
   return (
-    <div className="col-6">
-      <div className="woocommerce-billing-fields">
-        <h3>Billing Details</h3>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="form-row">
-            <label htmlFor="billing_country">
-              Civility <abbr className="required" title="required">*</abbr>
-            </label>
-            <select
-              {...register("billing_country", { required: "Civility is required" })}
-              id="billing_country"
-              name="billing_country"
-            >
-              <option value="">Select Civility</option>
-              <option value="AX">Mr</option>
-              <option value="AF">Mlle</option>
-              <option value="AF">Mme</option>
-            </select>
-            {errors.billing_country && <span className="error">{errors.billing_country.message}</span>}
-          </div>
+    <div className="woocommerce-billing-fields">
+      <h3>Billing Details</h3>
 
-          <div className="form-row">
-            <label htmlFor="billing_first_name">
-              First Name <abbr className="required" title="required">*</abbr>
-            </label>
-            <input
-              {...register("billing_first_name", { required: "First Name is required" })}
-              id="billing_first_name"
-              type="text"
-            />
-            {errors.billing_first_name && <span className="error">{errors.billing_first_name.message}</span>}
-          </div>
+      <div className="woocommerce-billing-fields__field-wrapper">
+        <p className={`form-row form-row-first ${errors.billing_first_name ? 'woocommerce-invalid' : ''}`}>
+          <label htmlFor="billing_first_name" className="required">
+            First Name
+          </label>
+          <input
+            type="text"
+            className="input-text"
+            name="billing_first_name"
+            id="billing_first_name"
+            required
+            ref={register({ required: "First name is required" })}
+            onBlur={() => validateField("billing_first_name")}
+          />
+          {errors.billing_first_name && <span className="woocommerce-error">{errors.billing_first_name.message}</span>}
+        </p>
 
-          <div className="form-row">
-            <label htmlFor="billing_last_name">
-              Last Name <abbr className="required" title="required">*</abbr>
-            </label>
-            <input
-              {...register("billing_last_name", { required: "Last Name is required" })}
-              id="billing_last_name"
-              type="text"
-            />
-            {errors.billing_last_name && <span className="error">{errors.billing_last_name.message}</span>}
-          </div>
+        <p className={`form-row form-row-last ${errors.billing_last_name ? 'woocommerce-invalid' : ''}`}>
+          <label htmlFor="billing_last_name" className="required">
+            Last Name
+          </label>
+          <input
+            type="text"
+            className="input-text"
+            name="billing_last_name"
+            id="billing_last_name"
+            required
+            ref={register({ required: "Last name is required" })}
+            onBlur={() => validateField("billing_last_name")}
+          />
+          {errors.billing_last_name && <span className="woocommerce-error">{errors.billing_last_name.message}</span>}
+        </p>
 
-          <div className="form-row">
-            <label htmlFor="billing_email">
-              Email Address <abbr className="required" title="required">*</abbr>
-            </label>
-            <input
-              {...register("billing_email", { 
-                required: "Email is required", 
-                pattern: { value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/, message: "Invalid email address" } 
-              })}
-              id="billing_email"
-              type="email"
-            />
-            {errors.billing_email && <span className="error">{errors.billing_email.message}</span>}
-          </div>
+        <p className={`form-row form-row-wide ${errors.billing_email ? 'woocommerce-invalid' : ''}`}>
+          <label htmlFor="billing_email" className="required">
+            Email Address
+          </label>
+          <input
+            type="email"
+            className="input-text"
+            name="billing_email"
+            id="billing_email"
+            required
+            ref={register({ required: "Email address is required", pattern: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/ })}
+            onBlur={() => validateField("billing_email")}
+          />
+          {errors.billing_email && <span className="woocommerce-error">{errors.billing_email.message}</span>}
+        </p>
 
-          <div className="form-row">
-            <label htmlFor="billing_phone">
-              Phone <abbr className="required" title="required">*</abbr>
-            </label>
-            <input
-              {...register("billing_phone", { 
-                required: "Phone is required", 
-                pattern: { value: /^[0-9]{10}$/, message: "Phone must be a 10 digit number" } 
-              })}
-              id="billing_phone"
-              type="text"
-            />
-            {errors.billing_phone && <span className="error">{errors.billing_phone.message}</span>}
-          </div>
-
-        </form>
+        <p className={`form-row form-row-wide ${errors.billing_phone ? 'woocommerce-invalid' : ''}`}>
+          <label htmlFor="billing_phone" className="required">
+            Phone Number
+          </label>
+          <input
+            type="tel"
+            className="input-text"
+            name="billing_phone"
+            id="billing_phone"
+            required
+            ref={register({ required: "Phone number is required" })}
+            onBlur={() => validateField("billing_phone")}
+          />
+          {errors.billing_phone && <span className="woocommerce-error">{errors.billing_phone.message}</span>}
+        </p>
       </div>
     </div>
   );
