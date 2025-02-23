@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom"; // Import useLocation
+import { useLocation } from "react-router-dom"; 
 import '../assets/css/bootstrap.min.css';
 import '../assets/css/style.css';
 import '../assets/css/responsive.css';
@@ -6,7 +6,7 @@ import Search from "./Search";
 import CartComponent from "./CartComponent";
 
 const Header = () => {
-  const location = useLocation(); // Get current route
+  const location = useLocation(); // pour obtenir route actuelle 
 
   return (
     <header className="header-area">

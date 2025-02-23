@@ -3,7 +3,6 @@ import { useState } from 'react';
 function ProductDetails({ product }) {
   const [message, setMessage] = useState('');
 
-  // Fonction pour afficher le message quand on clique sur le bouton
   const handleClick = () => {
     setMessage('Produit ajouté au panier!');
   };

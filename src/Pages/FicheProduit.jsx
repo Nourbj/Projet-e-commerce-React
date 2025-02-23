@@ -8,21 +8,20 @@ import "../assets/css/responsive.css";
 import OtherBrand from "../Components/OtherBrand";
 import ProductDescription from "../Components/ProductDescription";
 import FileAriane from "../Components/FileAriane";
+import ProductWidget from "../Components/ProductWidget";
 
 const FicheProduit = () => {
-  const { productId } = useParams();
+  const { id, category } = useParams();
   const [product, setProduct] = useState(null);
-
-    const fetchProduct = async () => {
-      const productData = await getProductById(productId);
-      setProduct(productData);
-  };
-  const { category, id } = useParams();
 
   useEffect(() => {
     const fetchProduct = async () => {
-      const data = await getProductById(id);
-      setProduct(data);
+      try {
+        const data = await getProductById(id);
+        setProduct(data);
+      } catch (error) {
+        console.error("Erreur lors de la récupération du produit:", error);
+      }
     };
 
     if (id) {
@@ -36,90 +35,40 @@ const FicheProduit = () => {
 
   return (
     <div className="single-product-area">
-    <div className="zigzag-bottom" />
-    <div className="container">
-      <div className="row">
-        <div className="col-md-4">
-          <div className="single-sidebar">
-            <h2 className="sidebar-title">Recently Viewed</h2>
-            <div className="thubmnail-recent">
-              <img
-                src="img/product-thumb-1.jpg"
-                className="recent-thumb"
-                alt=""
-              />
-              <h2>
-                <a href="">Sony Smart TV - 2015</a>
-              </h2>
-              <div className="product-sidebar-price">
-                <ins>700.00 € </ins> <del>100.00 €</del>
-              </div>
+      <div className="zigzag-bottom" />
+      <div className="container">
+        <div className="row">
+          <div className="col-md-4">
+            <div className="single-sidebar">
+              <h2 className="sidebar-title">Recently Viewed</h2>
+              <ProductWidget title="Recently Viewed" showViewAllButton={false} showTitle={false}/>
+              <OtherBrand />
             </div>
-            <div className="thubmnail-recent">
-              <img
-                src="img/product-thumb-1.jpg"
-                className="recent-thumb"
-                alt=""
-              />
-              <h2>
-                <a href="">Sony Smart TV - 2015</a>
-              </h2>
-              <div className="product-sidebar-price">
-                <ins>$700.00</ins> <del>$100.00</del>
-              </div>
-            </div>
-            <div className="thubmnail-recent">
-              <img
-                src="img/product-thumb-1.jpg"
-                className="recent-thumb"
-                alt=""
-              />
-              <h2>
-                <a href="">Sony Smart TV - 2015</a>
-              </h2>
-              <div className="product-sidebar-price">
-                <ins>$700.00</ins> <del>$100.00</del>
-              </div>
-            </div>
-            <div className="thubmnail-recent">
-              <img
-                src="img/product-thumb-1.jpg"
-                className="recent-thumb"
-                alt=""
-              />
-              <h2>
-                <a href="">Sony Smart TV - 2015</a>
-              </h2>
-              <div className="product-sidebar-price">
-                <ins>$700.00</ins> <del>$100.00</del>
-              </div>
-            </div>
-          </div>
-            <OtherBrand />
           </div>
           <div className="col-md-8">
             <div className="product-content-right">
               <FileAriane />
               <div className="row">
-                    <div className="col-sm-6">
-                        <div className="product-images">
-                            <div className="product-main-img">
-                                
-                                <img src={`/img/produts-img/${category}/${product.imageName}`}   alt={product.name} />
-                            </div>
-                            <div className="product-gallery">
-                                        <img src="/img/product-thumb-1.jpg" alt=""/>
-                                        <img src="/img/product-thumb-2.jpg" alt=""/>
-                                        <img src="/img/product-thumb-3.jpg" alt=""/>
-                            </div>
-                                
-                        </div>
+                <div className="col-sm-6">
+                  <div className="product-images">
+                    <div className="product-main-img">
+                      <img
+                        src={`/img/produts-img/${category || "default"}/${product.imageName}`}
+                        alt={product.name}
+                      />
                     </div>
+                    <div className="product-gallery">
+                      <img src="/img/product-thumb-1.jpg" alt="" />
+                      <img src="/img/product-thumb-2.jpg" alt="" />
+                      <img src="/img/product-thumb-3.jpg" alt="" />
+                    </div>
+                  </div>
+                </div>
                 <div className="col-sm-6">
                   <div className="product-inner">
                     <h2 className="product-name">{product.name}</h2>
                     <div className="product-inner-price">
-                      <ins>{product.price} €</ins> 
+                      <ins>{product.price} €</ins>
                       {product.oldPrice && <del>{product.oldPrice} €</del>}
                     </div>
                     <form className="cart">

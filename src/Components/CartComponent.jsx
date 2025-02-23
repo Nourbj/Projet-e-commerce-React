@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+
 
 function CartComponent() {
   const [cart, setCart] = useState({
@@ -27,21 +29,22 @@ function CartComponent() {
 
   return (
     <div className="col-sm-3 d-flex justify-content-end">
-      <div className="col-sm-0 d-flex justify-content-end">
-        <div className="shopping-item">
-          <a href="/cart">
-            Cart:{" "}
-            <span className="cart-amunt">
-              {loading ? "Loading..." : cart.subTotal.toFixed(2)} €  
-            </span>{" "}
-            <i className="fa fa-shopping-cart"></i>{" "}
-            <span className="product-count">
-              {loading ? "..." : cart.count}
-            </span>
-          </a>
-        </div>
-      </div>
+  <div className="col-sm-0 d-flex justify-content-end">
+    <div className="shopping-item">
+      <Link to="/cart">
+        Cart:{" "}
+        <span className="cart-amunt">
+          {loading ? "Loading..." : cart.subTotal.toFixed(2)} €
+        </span>{" "}
+        <i className="fa fa-shopping-cart"></i>{" "}
+        <span className="product-count">
+          {loading ? "..." : cart.count}
+        </span>
+      </Link>
     </div>
+  </div>
+</div>
+
   );
 }
 

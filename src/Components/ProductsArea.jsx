@@ -12,8 +12,7 @@ function ProductsArea() {
           />
 
           <ProductWidget 
-            title="Recently Viewed" 
-            apiUrl="http://localhost:3000/recently-viewed-products" 
+            title="Recently Viewed"
           />
 
           <ProductWidget 
