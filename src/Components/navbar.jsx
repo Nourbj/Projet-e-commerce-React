@@ -36,15 +36,13 @@ const Navigation = () => {
               <li className="active">
                 <Link to="/">Home</Link>
               </li>
-              {categories.length > 0 ? (
+              {categories.length > 0 && 
                 categories.map((category) => (
                   <li key={category.id}>
                     <Link to={`/Shop/${category.name.toLowerCase()}`}>{category.name}</Link>
                   </li>
                 ))
-              ) : (
-                <li><p>Aucune catégorie</p></li>
-              )}
+              }
             </ul>
           </nav>
         </div>

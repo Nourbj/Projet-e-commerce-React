@@ -1,14 +1,12 @@
-function ProductItem({ image, name, link, rating, price, oldPrice }) {
+function ProductItem({ image, name,rating, price, oldPrice }) {
   return (
     <div className="single-wid-product">
-      <a href={link}>
         <img 
           src={image} 
           className="product-thumb" 
         />
-      </a>
       <h2>
-        <a href={link}>{name}</a>
+        {name}
       </h2>
       <div className="product-wid-rating">
         {[...Array(5)].map((_, i) => (

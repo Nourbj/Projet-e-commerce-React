@@ -1,18 +1,37 @@
 
+/* Style pour l'arrière-plan de la section */
 .product-big-title-area {
-    background-color: #e3f2fd; /* Couleur bleu très clair */
-    padding: 0px 0; /* Ajouter de l'espace autour du titre */
-    margin-bottom: 0px; /* Espacement entre cette section et le reste du contenu */
-  }
-  
-  .product-bit-title h2 {
-    font-size: 36px; /* Taille du texte plus grande pour le titre */
-    font-weight: bold; /* Titre en gras */
-    color: #333; /* Couleur du texte pour le titre */
-    letter-spacing: 1px; /* Espacement entre les lettres pour un effet de texte plus espacé */
-    text-transform: capitalize; /* Capitaliser chaque mot du titre */
-    margin: 0;
-  }
+  background: linear-gradient(to right, #f7f8f9, #dfe4ea); /* Un joli dégradé */
+  padding: 0px 0; /* Espacement plus grand pour une meilleure présentation */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ajouter une ombre subtile */
+}
+
+/* Centrer le titre avec des espacements et une typographie améliorée */
+.product-bit-title.text-center {
+  text-align: center;
+  padding: 20px 15px;
+}
+
+.product-bit-title h2 {
+  font-size: 20px; /* Taille du titre */
+  font-weight: 10; /* Gras pour plus d'impact */
+  color: #2c3e50; /* Couleur sombre élégante */
+  text-transform: uppercase; /* Pour un effet de titre professionnel */
+  letter-spacing: 2px; /* Espacement des lettres */
+}
+
+
+/* Ajouter des bordures ou des ombres si nécessaire */
+.product-big-title-area {
+  border-bottom: 3px solid #ddd;
+}
+
+/* Effet de transition de fond */
+.product-big-title-area:hover {
+  background: linear-gradient(to right, #f1c40f,rgb(191, 180, 162));
+  transition: background-color 0.3s ease;
+}
+
   
   .container {
     max-width: 1200px; /* Largeur maximale du conteneur */

@@ -30,7 +30,7 @@ const FicheProduit = () => {
   }, [id]);
 
   if (!product) {
-    return <p>Chargement du produit...</p>;
+    return null;
   }
 
   return (

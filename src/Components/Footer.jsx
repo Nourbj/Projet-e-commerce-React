@@ -13,19 +13,12 @@ const Footer = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const data = await getCategories();
-        if (Array.isArray(data)) {
-          setCategories(data);
-        } else {
-          console.error("Données de catégories invalides :", data);
-          setCategories([]);
-        }
+        setCategories(await getCategories());
       } catch (error) {
         console.error("Erreur lors de la récupération des catégories :", error);
         setCategories([]);
       }
     };
-
     fetchCategories();
   }, []);
 
@@ -39,17 +32,15 @@ const Footer = () => {
           <div className="col-md-4 col-sm-6">
             <div className="footer-menu">
               <h2 className="footer-wid-title">Categories</h2>
-              <ul>
-                {categories.length > 0 ? (
-                  categories.map((category) => (
+              {categories.length > 0 && (
+                <ul>
+                  {categories.map((category) => (
                     <li key={category.id}>
-                    <Link to={`/Shop/${category.name.toLowerCase()}`}>{category.name}</Link>
+                      <Link to={`/Shop/${category.name.toLowerCase()}`}>{category.name}</Link>
                     </li>
-                  ))
-                ) : (
-                  <p>Aucune catégorie disponible.</p>
-                )}
-              </ul>
+                  ))}
+                </ul>
+              )}
             </div>
           </div>
 
