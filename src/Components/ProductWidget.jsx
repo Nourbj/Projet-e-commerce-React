@@ -39,7 +39,7 @@ function ProductWidget({ title, apiUrl, showViewAllButton = true, showTitle = tr
     };
 
     fetchData();
-  }, [title, apiUrl]);  // dépend de title et useeffect
+  }, [title, apiUrl]);  
 
   const handleViewAllClick = (e) => {
     e.preventDefault();
@@ -59,11 +59,9 @@ function ProductWidget({ title, apiUrl, showViewAllButton = true, showTitle = tr
           <>
             {displayedProducts.map((product) => {
 
-              // Utiliser la fonction getCategoryFromImage importée de Services/Catégorie
               const category = getCategoryFromImage(product.imageName);
 
               return (
-                //chaque produit est retourné sous forme de product item
                 <ProductItem
                   key={product.id || Math.random()} 
                   image={`/img/produts-img/${category}/${product.imageName || 'default.png'}`}

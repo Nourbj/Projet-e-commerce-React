@@ -35,7 +35,7 @@ function PanierItem({ items }) {
                 <td className="product-name">{item.name}</td>
 
                 <td className="product-price">
-                  <span className="amount">${price.toFixed(2)}</span>
+                  <span className="amount">{price.toFixed(2)} €</span>
                 </td>
 
                 <td className="product-quantity">
@@ -77,7 +77,7 @@ function PanierItem({ items }) {
                 </td>
 
                 <td className="product-subtotal">
-                  <span className="amount">${(price * item.qty).toFixed(2)}</span>
+                  <span className="amount">{(price * item.qty).toFixed(2)} €</span>
                 </td>
               </tr>
             );

@@ -29,35 +29,34 @@ const Search = () => {
   }, []);
 
   useEffect(() => {
-    if (category === "all") {
-      setSearchResults(allProducts); // Affiche tous les produits si la catégorie est "all"
-      return;
+    if (category !== "all") {
+      const filteredProducts = allProducts.filter(
+        (product) =>
+          product.category &&
+          product.category.toLowerCase() === category.toLowerCase()
+      );
+      setSearchResults(filteredProducts);
     }
-
-    const filteredProducts = allProducts.filter(
-      (product) =>
-        product.category &&
-        product.category.toLowerCase() === category.toLowerCase()
-    );
-    setSearchResults(filteredProducts);
   }, [category, allProducts]);
+  
+  
 
   const handleInputChange = (e) => {
     const query = e.target.value.toLowerCase();
     setSearchQuery(query);
   
     if (!query) {
-      setSearchResults([]);
+      setSearchResults([]); 
       return;
     }
   
     const filteredResults = allProducts.filter((product) =>
-      product.name && product.name.toLowerCase().startsWith(query) // Vérification de product.name
+      product.name && product.name.toLowerCase().startsWith(query)
     );
   
     setSearchResults(filteredResults);
   };
-
+  
   return (
     <div className="search-container">
       <div className="header-search">
@@ -69,7 +68,6 @@ const Search = () => {
           onChange={handleInputChange}
         />
       </div>
-
       {searchResults.length > 0 ? (
         <div className="search-results">
           <ul className="results-list">

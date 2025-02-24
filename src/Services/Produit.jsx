@@ -55,13 +55,12 @@ export const getProducts = async (title) => {
       const response = await fetch(url);
       const data = await response.json();
 
-      // Ajoutez un ID unique si le produit n'en a pas
       const productsWithId = data.map((product, index) => ({
         ...product,
-        id: product.id || `temp-id-${index}`, // Utilisation d'un ID temporaire si aucun ID n'existe
+        id: product.id || `temp-id-${index}`, 
       }));
 
-      return productsWithId.slice(0, 2); // Retourne les 2 premiers produits
+      return productsWithId.slice(0, 2); 
     } else {
       console.error("Titre non valide");
       return [];
@@ -118,7 +117,6 @@ const addToRecentlyViewed = (productId) => {
   let viewedProducts = Cookies.get("recentlyViewed");
   viewedProducts = viewedProducts ? JSON.parse(viewedProducts) : [];
 
-  // Vérification pour ne pas ajouter de doublon
   if (!viewedProducts.includes(productId)) {
     viewedProducts.unshift(productId);
   }
@@ -137,7 +135,6 @@ const getRecentlyViewedProducts = async (getAll = false) => {
 
   if (viewedProducts.length === 0) return [];
 
-  // Utilisation de Promise.all avec une gestion des erreurs pour chaque produit
   const productDetailsPromises = viewedProducts.map(async (id) => {
     try {
       const product = await getProductById(id);
@@ -150,7 +147,6 @@ const getRecentlyViewedProducts = async (getAll = false) => {
 
   const productDetails = await Promise.all(productDetailsPromises);
 
-  // Filtrer les produits nulls (en cas d'erreur)
   const validProducts = productDetails.filter(product => product !== null);
 
   return getAll ? validProducts : validProducts.slice(0, 3); 

@@ -60,7 +60,6 @@ const Actions = createSlice({
             state.tax = state.subTotal * 0.12;
             state.total = state.subTotal + state.tax;
           
-            console.log("Panier après ajout de l'article:", state);
             saveCartToLocalStorage(state);
           },
           
@@ -135,25 +134,20 @@ export const { setCart, addItem, removeFromCart, updateQuantity, clearCart } = A
 export const addToCart = (product, quantity = 1) => async (dispatch, getState) => {
   const { cart } = getState();
   
-  console.log('Etat actuel du panier:', cart); // Ajoutons un log pour voir le panier actuel
   const updatedItem = {
     id: product.id,
     name: product.name,
     price: product.price,
-    qty: quantity, // Assurez-vous que la quantité est passée correctement
+    qty: quantity, 
     imageName: product.imageName,
   };
-  console.log("Produit ajouté:", updatedItem);
   
 
   const existingItem = cart.items.find(item => item.id === product.id);
-  console.log('Produit existant:', existingItem); // Log pour vérifier si le produit existe déjà
 
   if (existingItem) {
-    // Si l'article existe déjà, on met à jour la quantité
     dispatch(updateQuantity({ id: product.id, qty: existingItem.qty + quantity }));
   } else {
-    // Sinon, on l'ajoute au panier
     if (!cart.cartId) {
       try {
         const response = await axios.post(API_URL, {
@@ -169,7 +163,6 @@ export const addToCart = (product, quantity = 1) => async (dispatch, getState) =
       }
     } else {
       dispatch(addItem(updatedItem));
-      console.log('Panier après ajout:', cart); // Log pour voir l'état après l'ajout
 
       try {
         const updatedCart = {
@@ -183,7 +176,6 @@ export const addToCart = (product, quantity = 1) => async (dispatch, getState) =
         await axios.put(`${API_URL}/${cart.cartId}`, updatedCart);
         dispatch(setCart(updatedCart));
       } catch (error) {
-        console.error("Erreur lors de la mise à jour du panier :", error);
       }
     }
   }

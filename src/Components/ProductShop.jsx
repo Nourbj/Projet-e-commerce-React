@@ -14,16 +14,13 @@ function ProductShop({ image, name, link, price, oldPrice, id }) {
     e.stopPropagation(); 
     e.preventDefault(); 
   
-    // Accédez à cart.items, qui est un tableau
     const items = cart.items || [];
   
     const existingProduct = items.find((product) => product.id === id);
   
     if (existingProduct) {
-      // Si le produit existe déjà, mettez à jour la quantité
       dispatch(updateQuantity(existingProduct.id, existingProduct.qty + 1)); 
     } else {
-      // Si le produit n'existe pas, ajoutez-le au panier
       const product = { 
         id: id || new Date().getTime(), 
         name, 
