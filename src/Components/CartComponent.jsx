@@ -1,51 +1,26 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-
-
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+ 
 function CartComponent() {
-  const [cart, setCart] = useState({
-    total: 0,
-    count: 0,
-    subTotal: 0,
-    tax: 0,
-  });
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const cartData = localStorage.getItem("cart"); 
-
-    if (cartData) {
-      const parsedCart = JSON.parse(cartData); 
-      setCart({
-        total: parsedCart.total || 0,         
-        count: parsedCart.items?.length || 0,  
-        subTotal: parsedCart.subTotal || 0,    
-        tax: parsedCart.tax || 0,              
-      });
-    }
-
-    setLoading(false); 
-  }, []); 
-
+  const navigate = useNavigate();
+  const { total, items } = useSelector((state) => state.cart);
+ 
+  const totalProducts = items.reduce((sum, item) => sum + item.qty, 0);
+ 
+  const handleCartClick = () => {
+    navigate("/cart");
+  };
+ 
   return (
-    <div className="col-sm-3 d-flex justify-content-end">
-  <div className="col-sm-0 d-flex justify-content-end">
-    <div className="shopping-item">
-      <Link to="/cart">
-        Cart:{" "}
-        <span className="cart-amunt">
-          {loading ? "Loading..." : cart.subTotal.toFixed(2)} €
-        </span>{" "}
+    <div className="col-sm-3">
+      <div className="shopping-item" style={{ cursor: "pointer" }} onClick={handleCartClick}>
+        Cart : <span className="cart-amunt">{total.toFixed(2)} €</span>{" "}
         <i className="fa fa-shopping-cart"></i>{" "}
-        <span className="product-count">
-          {loading ? "..." : cart.count}
-        </span>
-      </Link>
+        <span className="product-count">{totalProducts}</span>
+      </div>
     </div>
-  </div>
-</div>
-
   );
 }
-
+ 
 export default CartComponent;
+ 

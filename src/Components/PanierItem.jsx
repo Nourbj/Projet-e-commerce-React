@@ -1,16 +1,10 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { removeFromCart, updateQuantity } from "../Redux/Actions";
 
 function PanierItem({ items }) {
   const dispatch = useDispatch();
-
-  const getCategoryFromImage = (imageName) => {
-    const category = imageName.split("-")[0].toLowerCase();
-    return category.charAt(0).toUpperCase() + category.slice(1);
-  };
-
+  
   return (
     <div>
       <table cellSpacing={0} className="shop_table cart">
@@ -24,12 +18,10 @@ function PanierItem({ items }) {
           </tr>
         </thead>
         <tbody>
-          {items.map((item) => {
-            const category = getCategoryFromImage(item.imageName);
+          {items.map((item, index) => {
             const price = Number(item.price);
             return (
-              <tr key={item.id} className="cart_item">
-                {/* Product Remove Column */}
+              <tr key={`${item.id}-${index}`}>
                 <td className="product-remove">
                   <button
                     onClick={() => dispatch(removeFromCart(item.id))}
@@ -40,18 +32,14 @@ function PanierItem({ items }) {
                   </button>
                 </td>
 
-                {/* Product Name Column */}
                 <td className="product-name">{item.name}</td>
 
-                {/* Price Column */}
                 <td className="product-price">
                   <span className="amount">${price.toFixed(2)}</span>
                 </td>
 
-                {/* Quantity Column */}
                 <td className="product-quantity">
                   <div className="quantity buttons_added">
-                    {/* Bouton - */}
                     <button
                       className="minus"
                       onClick={() => {
@@ -65,7 +53,6 @@ function PanierItem({ items }) {
                       -
                     </button>
 
-                    {/* Input quantité */}
                     <input
                       type="number"
                       size={4}
@@ -75,13 +62,11 @@ function PanierItem({ items }) {
                       min={1}
                       onChange={(e) => {
                         const newQty = Number(e.target.value);
-                        if (newQty > 0) {
+                        if (newQty > 0 && !isNaN(newQty)) {
                           dispatch(updateQuantity({ id: item.id, qty: newQty }));
                         }
                       }}
                     />
-
-                    {/* Bouton + */}
                     <button
                       className="plus"
                       onClick={() => dispatch(updateQuantity({ id: item.id, qty: item.qty + 1 }))}
@@ -91,14 +76,13 @@ function PanierItem({ items }) {
                   </div>
                 </td>
 
-                {/* Subtotal Column */}
                 <td className="product-subtotal">
                   <span className="amount">${(price * item.qty).toFixed(2)}</span>
                 </td>
               </tr>
             );
           })}
-          <tr>
+          <tr key="checkout-row">
             <td className="actions" colSpan={5}>
               <Link to="/checkout">
                 <button type="button" className="checkout-button button alt wc-forward">

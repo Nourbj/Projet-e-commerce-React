@@ -8,7 +8,7 @@ const CartTotals = ({ subTotal, tax, total }) => {
     <div className="cart_totals">
       <h2>Cart Totals</h2>
 
-      <table cellspacing="0">
+      <table cellSpacing="0">
         <tbody>
           <tr className="cart-subtotal">
             <th>Cart Subtotal</th>

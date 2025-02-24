@@ -6,7 +6,7 @@ import Search from "./Search";
 import CartComponent from "./CartComponent";
 
 const Header = () => {
-  const location = useLocation(); // pour obtenir route actuelle 
+  const location = useLocation(); 
 
   return (
     <header className="header-area">
@@ -20,7 +20,7 @@ const Header = () => {
             </div>
           </div>
           <div className="col-sm-6 d-flex justify-content-center">
-            {location.pathname !== "/checkout" && location.pathname !== "/cart" && <Search />}
+            {/* {location.pathname !== "/checkout" && location.pathname !== "/cart" && <Search />} */}
           </div>
             <CartComponent />
           </div>

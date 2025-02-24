@@ -9,7 +9,7 @@ const Order = () => {
   const total = useSelector((state) => state.cart.total);
   const subTotal = useSelector((state) => state.cart.subTotal);
   const tax = useSelector((state) => state.cart.tax);
-  
+
   return (   
     <table className="shop_table">
       <thead>
@@ -19,8 +19,9 @@ const Order = () => {
         </tr>
       </thead>
       <tbody>
-        {cartItems.map((item) => (
-          <tr key={item.id} className="cart_item">
+        {cartItems.map((item, index) => (
+          // Ensure each row has a unique key, you can use a combination of item.id and index if needed
+          <tr key={`${item.id}-${index}`} className="cart_item">
             <td className="product-name">
               {item.name} <strong className="product-quantity">× {item.qty}</strong>
             </td>
@@ -53,5 +54,6 @@ const Order = () => {
     </table>
   );
 };
+
 
 export default Order;

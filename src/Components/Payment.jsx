@@ -5,10 +5,10 @@ import '../assets/css/style.css';
 import '../assets/css/responsive.css';
 
 const Payment = () => {
-  const { register, handleSubmit, watch } = useForm(); // Initialize React Hook Form
+  const { register, handleSubmit, watch } = useForm();
   
   const onSubmit = (data) => {
-    console.log(data); // Handle form submission
+    console.log(data); 
   };
 
   return (
@@ -21,7 +21,7 @@ const Payment = () => {
               type="radio"
               id="payment_method_bacs"
               value="bacs"
-              {...register('payment_method')} // Register payment method
+              {...register('payment_method')} 
               defaultChecked
             />
             <label htmlFor="payment_method_bacs">
@@ -42,7 +42,7 @@ const Payment = () => {
               type="radio"
               id="payment_method_cheque"
               value="cheque"
-              {...register('payment_method')} // Register payment method
+              {...register('payment_method')}
             />
             <label htmlFor="payment_method_cheque">
               Cheque Payment
@@ -60,7 +60,7 @@ const Payment = () => {
               type="radio"
               id="payment_method_paypal"
               value="paypal"
-              {...register('payment_method')} // Register payment method
+              {...register('payment_method')} 
             />
             <label htmlFor="payment_method_paypal">
               PayPal

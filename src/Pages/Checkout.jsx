@@ -80,25 +80,22 @@ const Checkout = () => {
   };
 
   const handlePlaceOrder = async () => {
-    // Valider les champs de facturation, expédition et paiement
     const isBillingValid = await validateBillingDetails();
     const isShippingValid = await validateShippingAddress();
     const isPaymentValid = await validatePayment();
   
-    // Si une des validations échoue, afficher une erreur
     if (!isBillingValid || !isShippingValid || !isPaymentValid) {
       toast.error("Please fill out all required fields correctly.");
       return;  
     }
   
-    // Essayez de soumettre la commande à l'API
     try {
       const response = await fetch('http://localhost:3000/orders', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(orderData), // envoyer les données sous forme JSON
+        body: JSON.stringify(orderData), 
       });
   
       if (!response.ok) {
@@ -250,6 +247,7 @@ const Checkout = () => {
                         </div>
                       </div>
                     </div>
+                    </form>
                     <h3 id="order_review_heading">Your order</h3>
                                 <div
                                     id="order_review"
@@ -262,27 +260,28 @@ const Checkout = () => {
                       <h3>Payment</h3>
 
                       <Payment />
+                      </div>
+                     
 
                       <div className="form-row place-order">
-  <button
-    type="button"
-    onClick={handlePlaceOrder} // Calls the order placement handler
-    className={`button alt${orderPlaced ? ' disabled' : ''}`} // Disable button after order is placed
-    disabled={orderPlaced} // Disable the button once the order is placed
-  >
-    {orderPlaced ? "Order Placed" : "Place Order"} {/* Button text changes when order is placed */}
-  </button>
-</div>
+                      <button
+                        type="button"
+                        onClick={handlePlaceOrder} 
+                        className={`button alt${orderPlaced ? ' disabled' : ''}`} 
+                        disabled={orderPlaced}
+                      >
+                        {orderPlaced ? "Order Placed" : "Place Order"} 
+                      </button>
+                    </div>
 
                     </div>
-                  </form>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+        </div>
+   
   );
 };
 

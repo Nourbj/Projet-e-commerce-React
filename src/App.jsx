@@ -7,24 +7,17 @@ import Search from "./Components/Search";
 import Checkout from "./Pages/Checkout";
 import Cart from "./Pages/Cart";
 
-
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="/:category" element={<Shop />} />
           <Route path="/Shop/:category" element={<Shop />} />
           <Route path="/Shop/:category/ProductDetails/:id" element={<ProductDetails />} />
-          <Route path="/:Search" element={<Search />} />
+          <Route path="/Search" element={<Search />} />
           <Route path="/Checkout" element={<Checkout />} />
           <Route path="/Cart" element={<Cart />} />
-
-
-
-
-
         </Route>
       </Routes>
     </BrowserRouter>

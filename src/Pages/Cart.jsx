@@ -18,9 +18,9 @@ const Cart = () => {
                 <div className="cart-collaterals">
                   <Intrest />
                   <CartTotals
-                    subTotal={cart.subTotal}
-                    tax={cart.tax}
-                    total={cart.total}
+                    subTotal={cart.subTotal.toFixed(2)}
+                    tax={cart.tax.toFixed(2)}
+                    total={cart.total.toFixed(2)}
                   />
                 </div>
               </div>

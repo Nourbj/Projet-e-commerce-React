@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom"; // Import useNavigate
+import { useParams, useNavigate } from "react-router-dom"; 
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../Redux/Actions"; 
 import { selectCart } from "../Redux/Store";

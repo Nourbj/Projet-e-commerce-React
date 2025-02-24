@@ -1,17 +1,16 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
-import { getProductsByCategory,getProductById } from "../Services/Produit";  
+import { getProductsByCategory, getProductById } from "../Services/Produit";
 import "../assets/css/style.css";
 
 const API_BASE_URL = "http://localhost:3000";
 
-
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [allProducts, setAllProducts] = useState([]); 
-  const { productId, category } = useParams();
+  const [allProducts, setAllProducts] = useState([]);
+  const { productId, category = "all" } = useParams(); // Valeur par défaut pour category
   const [product, setProduct] = useState(null);
   const [categoryTitle, setCategoryTitle] = useState("All Products");
   const [products, setProducts] = useState([]);
@@ -19,19 +18,20 @@ const Search = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    
-    
     const fetchProducts = async () => {
       setLoading(true);
       try {
         const data = await getProductsByCategory();
+
         if (category) {
           setCategoryTitle(category.charAt(0).toUpperCase() + category.slice(1));
-          const selectedCategory = data.find(item => item.name.toLowerCase() === category.toLowerCase());
+          const selectedCategory = data.find(
+            (item) => item.name.toLowerCase() === category.toLowerCase()
+          );
           setProducts(selectedCategory ? selectedCategory.items : []);
         } else {
           setCategoryTitle("All Products");
-          setProducts(data.flatMap(item => item.items));
+          setProducts(data.flatMap((item) => item.items));
         }
       } catch (error) {
         setError("Erreur de chargement des produits");
@@ -49,6 +49,7 @@ const Search = () => {
         setAllProducts(response.data);
       } catch (error) {
         console.error("Erreur lors de la récupération des produits :", error);
+        setError("Erreur lors de la récupération des produits");
       }
     };
 
@@ -58,7 +59,7 @@ const Search = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       if (productId) {
-        const existingProduct = allProducts.find(p => p.id === productId);
+        const existingProduct = allProducts.find((p) => p.id === productId);
         if (existingProduct) {
           setProduct(existingProduct);
         } else {
@@ -67,6 +68,7 @@ const Search = () => {
             setProduct(data);
           } catch (error) {
             console.error("Erreur lors de la récupération du produit :", error);
+            setError("Produit introuvable");
           }
         }
       }
@@ -91,6 +93,10 @@ const Search = () => {
     setSearchResults(filteredResults);
   };
 
+  if (error) {
+    return <p>{error}</p>;
+  }
+
   if (productId && !product) {
     return <p>Chargement du produit...</p>;
   }
@@ -107,13 +113,13 @@ const Search = () => {
         />
       </div>
 
-      {searchResults.length > 0 && (
+      {searchResults.length > 0 ? (
         <div className="search-results">
           <ul className="results-list">
             {searchResults.map((result) => (
               <li key={result.id} className="result-item">
                 <Link
-                  to={`/Shop/${category || "all"}/ProductDetails/${result.id}`}
+                  to={`/Shop/${category}/ProductDetails/${result.id}`}
                   style={{ textDecoration: "none", color: "inherit" }}
                 >
                   <span>{result.name}</span>
@@ -122,6 +128,8 @@ const Search = () => {
             ))}
           </ul>
         </div>
+      ) : (
+        searchQuery && <p>Aucun résultat trouvé pour "{searchQuery}"</p>
       )}
     </div>
   );
