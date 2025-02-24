@@ -4533,11 +4533,18 @@
           "price": "284.31",
           "qty": 1,
           "imageName": "/img/produts-img/Apple/apple-ipad-97-2018.jpg"
+        },
+        {
+          "id": 4015,
+          "name": "huawei nova 5 .jpg",
+          "price": "186.88",
+          "qty": 1,
+          "imageName": "/img/produts-img/Huawei/huawei-nova-5-.jpg"
         }
       ],
-      "total": 318.42719999999997,
-      "subTotal": 284.31,
-      "tax": 34.1172,
+      "total": 505.30719999999997,
+      "subTotal": 471.19,
+      "tax": 56.5428,
       "cartId": "30f1",
       "id": "30f1"
     },
