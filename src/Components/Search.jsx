@@ -30,11 +30,14 @@ const Search = () => {
 
   useEffect(() => {
     if (category === "all") {
+      setSearchResults(allProducts); // Affiche tous les produits si la catégorie est "all"
       return;
     }
 
     const filteredProducts = allProducts.filter(
-      (product) => product.category.toLowerCase() === category.toLowerCase()
+      (product) =>
+        product.category &&
+        product.category.toLowerCase() === category.toLowerCase()
     );
     setSearchResults(filteredProducts);
   }, [category, allProducts]);
@@ -42,29 +45,18 @@ const Search = () => {
   const handleInputChange = (e) => {
     const query = e.target.value.toLowerCase();
     setSearchQuery(query);
-
+  
     if (!query) {
       setSearchResults([]);
       return;
     }
-
+  
     const filteredResults = allProducts.filter((product) =>
-      product.name.toLowerCase().startsWith(query)
+      product.name && product.name.toLowerCase().startsWith(query) // Vérification de product.name
     );
-
+  
     setSearchResults(filteredResults);
   };
-
-  if (error) {
-    return <p>{error}</p>;
-  }
-
-  if (productId) {
-    const product = allProducts.find((p) => p.id === productId);
-    if (!product) {
-      return <p>Chargement du produit...</p>;
-    }
-  }
 
   return (
     <div className="search-container">

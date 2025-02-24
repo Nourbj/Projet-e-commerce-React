@@ -39,7 +39,10 @@ const Navigation = () => {
               {categories.length > 0 && 
                 categories.map((category) => (
                   <li key={category.id}>
-                    <Link to={`/Shop/${category.name.toLowerCase()}`}>{category.name}</Link>
+                    {/* Vérification de category.name avant de faire toLowerCase */}
+                    <Link to={`/Shop/${category.name ? category.name.toLowerCase() : 'unknown'}`}>
+                      {category.name ? category.name : 'Catégorie inconnue'}
+                    </Link>
                   </li>
                 ))
               }
