@@ -20,7 +20,6 @@ const Order = () => {
       </thead>
       <tbody>
         {cartItems.map((item, index) => (
-          // Ensure each row has a unique key, you can use a combination of item.id and index if needed
           <tr key={`${item.id}-${index}`} className="cart_item">
             <td className="product-name">
               {item.name} <strong className="product-quantity">× {item.qty}</strong>
